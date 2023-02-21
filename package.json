@@ -27,9 +27,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "watch": "parcel watch",
-    "build": "npm run clean && parcel build",
-    "patch": "npm run build && npm version patch",
-    "publish": "npm run patch"
+    "build": "npm run clean && parcel build"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.8.3",

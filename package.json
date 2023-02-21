@@ -1,9 +1,9 @@
 {
-  "name": "@falmar/themes-widget",
+  "name": "@heycarson/themes-widget",
   "type": "module",
   "version": "0.0.10",
   "description": "Themes widget",
-  "author": "David Lavieri <david@lavieri.dev>",
+  "author": "David Lavieri <david@heycarson.com>",
   "license": "MIT",
   "main": "dist/main.js",
   "css": "dist/main.css",
@@ -27,10 +27,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/falmar/themes-widget.git"
+    "url": "git+git@bitbucket.org:heycarson/themes-widget.git"
   },
   "bugs": {
-    "url": "https://github.com/falmar/themes-widget/issues"
+    "url": "https://bitbucket.org/heycarson/themes-widget/jira"
   },
-  "homepage": "https://github.com/falmar/themes-widget#readme"
+  "homepage": "https://bitbucket.org/heycarson/themes-widget"
 }

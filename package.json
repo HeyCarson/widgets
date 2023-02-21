@@ -18,7 +18,9 @@
       "source": "src/index.scss"
     },
     "developer": {
-      "source": "src/developer/index.js"
+      "source": "src/developer/index.js",
+      "outputFormat": "esmodule",
+      "isLibrary": true
     },
     "devcss": {
       "source": "src/developer/index.scss"

@@ -16,9 +16,11 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
   padding-top: 16px;
   padding-bottom: 16px;
   font-family: $font-family;
+  border: 1px solid rgba(136,136,136,.1254901961);
 
   &--dark {
     background: linear-gradient(180deg, #0E1C6C -32.83%, #2A377D -32.83%, #2A377D -32.81%, #584DC4 131.29%);
+    border: 1px solid transparent;
   }
 
   &--small {

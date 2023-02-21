@@ -5,6 +5,8 @@
   "description": "Themes widget",
   "author": "David Lavieri <david@heycarson.com>",
   "license": "MIT",
+  "developer": "dist/developer.js",
+  "devcss": "dist/developer.css",
   "main": "dist/main.js",
   "css": "dist/main.css",
   "source": "src/index.js",
@@ -13,12 +15,21 @@
       "source": "src/index.js"
     },
     "css": {
-      "source": "src/widget.scss"
+      "source": "src/index.scss"
+    },
+    "developer": {
+      "source": "src/developer/index.js"
+    },
+    "devcss": {
+      "source": "src/developer/index.scss"
     }
   },
   "scripts": {
+    "clean": "rm -rf dist",
     "watch": "parcel watch",
-    "build": "parcel build"
+    "build": "npm run clean && parcel build",
+    "patch": "npm run build && npm version patch",
+    "publish": "npm run patch && npm publish"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.8.3",

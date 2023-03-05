@@ -1,46 +1,46 @@
 const logoImgLight = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-logo-light.svg'
 const logoImgDark = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-logo-dark.svg'
-const starImg = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-star.svg'
+const starLight = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-star-light.svg'
+const starDark = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-star-dark.svg'
 
 const THEMES_PAGE = 'https://heycarson.com/themes'
 const DEVELOPER_PAGE = 'https://heycarson.com/themes/developer/'
-const smallBreakpoint = 410
-const containerPadding = 32
 
 export const checkSize = (container, width) => {
-  const isSmall = width <= smallBreakpoint - containerPadding
+  container.classList.toggle('hc-developer-widget--small', width <= 390)
+  container.classList.toggle('hc-developer-widget--left', width <= 270)
 
-  container
-    .classList.toggle('hc-developer-widget--small', isSmall)
-  container
-    .querySelector('.hc-developer-widget__logo-container')
-    .classList.toggle('hc-developer-widget__logo-container--small', isSmall)
-  container
-    .querySelector('.hc-developer-widget__star-container')
-    .classList.toggle('hc-developer-widget__star-container--small', isSmall)
-  container
-    .querySelector('.hc-developer-widget__review-container')
-    .classList.toggle('hc-developer-widget__review-container--small', isSmall)
+  const logoContainer = container.querySelector('.hc-developer-widget__logo-container')
+  logoContainer.classList.toggle('hc-developer-widget__logo-container--small', width <= 390)
+  logoContainer.classList.toggle('hc-developer-widget__logo-container--left', width <= 270)
+
+  const starContainer = container.querySelector('.hc-developer-widget__star-container')
+  starContainer.classList.toggle('hc-developer-widget__star-container--small', width <= 270)
+  starContainer.classList.toggle('hc-developer-widget__star-container--left', width <= 270)
+
+  const reviewContainer = container.querySelector('.hc-developer-widget__review-container')
+  reviewContainer.classList.toggle('hc-developer-widget__review-container--small', width <= 270)
+  reviewContainer.classList.toggle('hc-developer-widget__review-container--left', width <= 270)
 }
 
 export const changeWidget = (container, { dark, rating, reviews, developer } = {}) => {
-  container
-    .classList.toggle('hc-developer-widget--dark', dark)
-  container
-    .querySelector('.hc-developer-widget__logo')
-    .setAttribute('src', dark ? logoImgDark : logoImgLight)
-  container
-    .querySelector('.hc-developer-widget__based')
-    .classList.toggle('hc-developer-widget__based--dark', dark)
+  container.replaceChild(
+    buildLogo({ dark }),
+    container.querySelector('.hc-developer-widget__logo-container')
+  )
 
-  const ratingEl = container.querySelector('.hc-developer-widget__rating')
-  ratingEl.innerText = `${rating} / 5`
-  ratingEl.classList.toggle('hc-developer-widget__rating--dark', dark)
+  container.replaceChild(
+    buildStar({ rating, dark }),
+    container.querySelector('.hc-developer-widget__star-container')
+  )
 
-  const reviewEl = container.querySelector('.hc-developer-widget__review')
-  reviewEl.innerText = reviews === 1 ? '1 review' : `${reviews} reviews`
-  reviewEl.setAttribute('href', `${DEVELOPER_PAGE}${developer}`)
-  reviewEl.classList.toggle('hc-developer-widget__review--dark', dark)
+  container.replaceChild(
+    buildReviews({
+      developer, rating, reviews, dark
+    }),
+    container.querySelector('.hc-developer-widget__review-container')
+  )
+
 }
 
 const buildLogo = ({ dark }) => {
@@ -52,7 +52,7 @@ const buildLogo = ({ dark }) => {
   logoContainer.setAttribute('rel', 'noopener')
   logoContainer.classList.add('hc-developer-widget__logo-container')
   logo.classList.add('hc-developer-widget__logo')
-  logo.setAttribute('src', dark ? logoImgDark : logoImgLight)
+  logo.setAttribute('src', !dark ? logoImgDark : logoImgLight)
 
   logoContainer.appendChild(logo)
 
@@ -60,44 +60,51 @@ const buildLogo = ({ dark }) => {
 }
 
 const buildStar = ({ rating, dark }) => {
+  const starAmount = Math.floor(rating)
   const starContainer = document.createElement('div')
   const star = document.createElement('img')
-  const rate = document.createElement('span')
+  const starBack = document.createElement('div')
+
+  star.classList.add('hc-developer-widget__star')
+  star.setAttribute('src', dark ? starDark : starLight)
+  starBack.classList.add('hc-developer-widget__star-background')
+  starBack.classList.toggle('hc-developer-widget__star-background--dark', dark)
 
   starContainer.classList.add('hc-developer-widget__star-container')
-  star.classList.add('hc-developer-widget__star')
-  rate.classList.add('hc-developer-widget__rating')
-  rate.classList.toggle('hc-developer-widget__rating--dark', dark)
 
-  star.setAttribute('src', starImg)
-  rate.innerText = `${rating} / 5`
+  starBack.appendChild(star)
 
-  starContainer.appendChild(star)
-  starContainer.appendChild(rate)
+  ;(new Array(starAmount).fill(0))
+    .forEach(star => starContainer.appendChild(starBack.cloneNode(true)))
 
   return starContainer
 }
 
-const buildReviews = ({ developer, reviews, dark }) => {
+const buildReviews = ({ developer, rating, reviews, dark }) => {
   const reviewContainer = document.createElement('div')
-  const based = document.createElement('span')
+  const rate = document.createElement('span')
+  const separator = document.createElement('span')
   const review = document.createElement('a')
 
   reviewContainer.classList.add('hc-developer-widget__review-container')
 
-  based.classList.add('hc-developer-widget__based')
-  based.classList.toggle('hc-developer-widget__based--dark', dark)
+  rate.classList.add('hc-developer-widget__rating')
+  rate.classList.toggle('hc-developer-widget__rating--dark', dark)
+  separator.classList.add('hc-developer-widget__separator')
+  separator.classList.toggle('hc-developer-widget__separator--dark', dark)
   review.classList.add('hc-developer-widget__review')
   review.classList.toggle('hc-developer-widget__review--dark', dark)
 
-  based.innerText = 'Based on'
+  rate.innerText = rating
+  separator.innerText = '|'
 
-  review.innerText = `${reviews} reviews`
+  review.innerText = reviews === 1 ? '1 review' : `${reviews} reviews`
   review.setAttribute('href', DEVELOPER_PAGE + developer + '?wgl=1')
   review.setAttribute('target', '_blank')
   review.setAttribute('rel', 'noopener')
 
-  reviewContainer.appendChild(based)
+  reviewContainer.appendChild(rate)
+  reviewContainer.appendChild(separator)
   reviewContainer.appendChild(review)
 
   return reviewContainer
@@ -115,6 +122,7 @@ export default function builder (element, options = {}) {
     dark: options.dark
   }))
   container.appendChild(buildReviews({
+    rating: options.rating,
     developer: options.developer,
     reviews: options.reviews,
     dark: options.dark

@@ -5,11 +5,11 @@ const initialOptions = {
   element: null,
   apiKey: null,
   developer: '',
-  darkMode: false
+  light: true
 }
 
 const fetchDeveloper = async (endpoint, dev, wgp) => {
-  return await fetch(`${endpoint}/v1/themes/developers/${dev}${wgp ? '?wgp=1' : ''}`)
+  return await fetch(`${endpoint}/v1/themes/developers/${dev}${wgp ? '?wgp=1&slug=1' : ''}`)
     .then((res) => {
       if (res.ok) {
         return res.json()
@@ -66,22 +66,22 @@ class DeveloperWidget {
     }
 
     let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0)
-    rating = rating.toFixed(Math.floor(rating) === rating ? 0 : 1)
+    rating = rating.toFixed(1) // Math.floor(rating) === rating ? 0 : 1
 
     if (!this.container) {
       this.container = builder(this.options.element, {
         rating,
         developer: this.developer.slug,
-        dark: this.options.darkMode,
+        dark: !this.options.light,
         reviews: this.developer.review_count
       })
 
-      this.observer.observe(this.container)
+      this.observer.observe(this.options.element)
     } else {
       changeWidget(this.container, {
         rating,
         developer: this.developer.slug,
-        dark: this.options.darkMode,
+        dark: !this.options.light,
         reviews: this.developer.review_count
       })
     }
@@ -93,10 +93,8 @@ class DeveloperWidget {
     }
 
     this.observer.disconnect()
-
-    this.container.removeEventListener('resize', this.viewportHandler)
-
     this.options.element.removeChild(this.container)
+    this.container = null
   }
 }
 

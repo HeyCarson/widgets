@@ -1,28 +1,36 @@
 const $393e6e330497b506$var$logoImgLight = "https://carson-themes.s3.amazonaws.com/assets/heycarson-logo-light.svg";
 const $393e6e330497b506$var$logoImgDark = "https://carson-themes.s3.amazonaws.com/assets/heycarson-logo-dark.svg";
-const $393e6e330497b506$var$starImg = "https://carson-themes.s3.amazonaws.com/assets/heycarson-star.svg";
+const $393e6e330497b506$var$starLight = "https://carson-themes.s3.amazonaws.com/assets/heycarson-star-light.svg";
+const $393e6e330497b506$var$starDark = "https://carson-themes.s3.amazonaws.com/assets/heycarson-star-dark.svg";
 const $393e6e330497b506$var$THEMES_PAGE = "https://heycarson.com/themes";
 const $393e6e330497b506$var$DEVELOPER_PAGE = "https://heycarson.com/themes/developer/";
-const $393e6e330497b506$var$smallBreakpoint = 410;
-const $393e6e330497b506$var$containerPadding = 32;
 const $393e6e330497b506$export$c4a38de546513c4e = (container, width)=>{
-    const isSmall = width <= $393e6e330497b506$var$smallBreakpoint - $393e6e330497b506$var$containerPadding;
-    container.classList.toggle("hc-developer-widget--small", isSmall);
-    container.querySelector(".hc-developer-widget__logo-container").classList.toggle("hc-developer-widget__logo-container--small", isSmall);
-    container.querySelector(".hc-developer-widget__star-container").classList.toggle("hc-developer-widget__star-container--small", isSmall);
-    container.querySelector(".hc-developer-widget__review-container").classList.toggle("hc-developer-widget__review-container--small", isSmall);
+    container.classList.toggle("hc-developer-widget--small", width <= 390);
+    container.classList.toggle("hc-developer-widget--left", width <= 270);
+    const logoContainer = container.querySelector(".hc-developer-widget__logo-container");
+    logoContainer.classList.toggle("hc-developer-widget__logo-container--small", width <= 390);
+    logoContainer.classList.toggle("hc-developer-widget__logo-container--left", width <= 270);
+    const starContainer = container.querySelector(".hc-developer-widget__star-container");
+    starContainer.classList.toggle("hc-developer-widget__star-container--small", width <= 270);
+    starContainer.classList.toggle("hc-developer-widget__star-container--left", width <= 270);
+    const reviewContainer = container.querySelector(".hc-developer-widget__review-container");
+    reviewContainer.classList.toggle("hc-developer-widget__review-container--small", width <= 270);
+    reviewContainer.classList.toggle("hc-developer-widget__review-container--left", width <= 270);
 };
 const $393e6e330497b506$export$1d83028bd73dd3cc = (container, { dark: dark , rating: rating , reviews: reviews , developer: developer  } = {})=>{
-    container.classList.toggle("hc-developer-widget--dark", dark);
-    container.querySelector(".hc-developer-widget__logo").setAttribute("src", dark ? $393e6e330497b506$var$logoImgDark : $393e6e330497b506$var$logoImgLight);
-    container.querySelector(".hc-developer-widget__based").classList.toggle("hc-developer-widget__based--dark", dark);
-    const ratingEl = container.querySelector(".hc-developer-widget__rating");
-    ratingEl.innerText = `${rating} / 5`;
-    ratingEl.classList.toggle("hc-developer-widget__rating--dark", dark);
-    const reviewEl = container.querySelector(".hc-developer-widget__review");
-    reviewEl.innerText = reviews === 1 ? "1 review" : `${reviews} reviews`;
-    reviewEl.setAttribute("href", `${$393e6e330497b506$var$DEVELOPER_PAGE}${developer}`);
-    reviewEl.classList.toggle("hc-developer-widget__review--dark", dark);
+    container.replaceChild($393e6e330497b506$var$buildLogo({
+        dark: dark
+    }), container.querySelector(".hc-developer-widget__logo-container"));
+    container.replaceChild($393e6e330497b506$var$buildStar({
+        rating: rating,
+        dark: dark
+    }), container.querySelector(".hc-developer-widget__star-container"));
+    container.replaceChild($393e6e330497b506$var$buildReviews({
+        developer: developer,
+        rating: rating,
+        reviews: reviews,
+        dark: dark
+    }), container.querySelector(".hc-developer-widget__review-container"));
 };
 const $393e6e330497b506$var$buildLogo = ({ dark: dark  })=>{
     const logoContainer = document.createElement("a");
@@ -32,39 +40,44 @@ const $393e6e330497b506$var$buildLogo = ({ dark: dark  })=>{
     logoContainer.setAttribute("rel", "noopener");
     logoContainer.classList.add("hc-developer-widget__logo-container");
     logo.classList.add("hc-developer-widget__logo");
-    logo.setAttribute("src", dark ? $393e6e330497b506$var$logoImgDark : $393e6e330497b506$var$logoImgLight);
+    logo.setAttribute("src", !dark ? $393e6e330497b506$var$logoImgDark : $393e6e330497b506$var$logoImgLight);
     logoContainer.appendChild(logo);
     return logoContainer;
 };
 const $393e6e330497b506$var$buildStar = ({ rating: rating , dark: dark  })=>{
+    const starAmount = Math.floor(rating);
     const starContainer = document.createElement("div");
     const star = document.createElement("img");
-    const rate = document.createElement("span");
-    starContainer.classList.add("hc-developer-widget__star-container");
+    const starBack = document.createElement("div");
     star.classList.add("hc-developer-widget__star");
-    rate.classList.add("hc-developer-widget__rating");
-    rate.classList.toggle("hc-developer-widget__rating--dark", dark);
-    star.setAttribute("src", $393e6e330497b506$var$starImg);
-    rate.innerText = `${rating} / 5`;
-    starContainer.appendChild(star);
-    starContainer.appendChild(rate);
+    star.setAttribute("src", dark ? $393e6e330497b506$var$starDark : $393e6e330497b506$var$starLight);
+    starBack.classList.add("hc-developer-widget__star-background");
+    starBack.classList.toggle("hc-developer-widget__star-background--dark", dark);
+    starContainer.classList.add("hc-developer-widget__star-container");
+    starBack.appendChild(star);
+    new Array(starAmount).fill(0).forEach((star)=>starContainer.appendChild(starBack.cloneNode(true)));
     return starContainer;
 };
-const $393e6e330497b506$var$buildReviews = ({ developer: developer , reviews: reviews , dark: dark  })=>{
+const $393e6e330497b506$var$buildReviews = ({ developer: developer , rating: rating , reviews: reviews , dark: dark  })=>{
     const reviewContainer = document.createElement("div");
-    const based = document.createElement("span");
+    const rate = document.createElement("span");
+    const separator = document.createElement("span");
     const review = document.createElement("a");
     reviewContainer.classList.add("hc-developer-widget__review-container");
-    based.classList.add("hc-developer-widget__based");
-    based.classList.toggle("hc-developer-widget__based--dark", dark);
+    rate.classList.add("hc-developer-widget__rating");
+    rate.classList.toggle("hc-developer-widget__rating--dark", dark);
+    separator.classList.add("hc-developer-widget__separator");
+    separator.classList.toggle("hc-developer-widget__separator--dark", dark);
     review.classList.add("hc-developer-widget__review");
     review.classList.toggle("hc-developer-widget__review--dark", dark);
-    based.innerText = "Based on";
-    review.innerText = `${reviews} reviews`;
+    rate.innerText = rating;
+    separator.innerText = "|";
+    review.innerText = reviews === 1 ? "1 review" : `${reviews} reviews`;
     review.setAttribute("href", $393e6e330497b506$var$DEVELOPER_PAGE + developer + "?wgl=1");
     review.setAttribute("target", "_blank");
     review.setAttribute("rel", "noopener");
-    reviewContainer.appendChild(based);
+    reviewContainer.appendChild(rate);
+    reviewContainer.appendChild(separator);
     reviewContainer.appendChild(review);
     return reviewContainer;
 };
@@ -80,6 +93,7 @@ function $393e6e330497b506$export$2e2bcd8739ae039(element, options = {}) {
         dark: options.dark
     }));
     container.appendChild($393e6e330497b506$var$buildReviews({
+        rating: options.rating,
         developer: options.developer,
         reviews: options.reviews,
         dark: options.dark
@@ -94,10 +108,10 @@ const $410a0149dfbe17cf$var$initialOptions = {
     element: null,
     apiKey: null,
     developer: "",
-    darkMode: false
+    light: true
 };
 const $410a0149dfbe17cf$var$fetchDeveloper = async (endpoint, dev, wgp)=>{
-    return await fetch(`${endpoint}/v1/themes/developers/${dev}${wgp ? "?wgp=1" : ""}`).then((res)=>{
+    return await fetch(`${endpoint}/v1/themes/developers/${dev}${wgp ? "?wgp=1&slug=1" : ""}`).then((res)=>{
         if (res.ok) return res.json();
         if (res.status === 404) return null;
         const body = res.json();
@@ -134,27 +148,28 @@ class $410a0149dfbe17cf$var$DeveloperWidget {
         if (this.developer?.slug !== this.options.developer) this.developer = await $410a0149dfbe17cf$var$fetchDeveloper(this.options.endpoint, this.options.developer, !this.developer);
         if (!this.developer) throw new Error("Developer not found");
         let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0);
-        rating = rating.toFixed(Math.floor(rating) === rating ? 0 : 1);
+        rating = rating.toFixed(1) // Math.floor(rating) === rating ? 0 : 1
+        ;
         if (!this.container) {
             this.container = (0, $393e6e330497b506$export$2e2bcd8739ae039)(this.options.element, {
                 rating: rating,
                 developer: this.developer.slug,
-                dark: this.options.darkMode,
+                dark: !this.options.light,
                 reviews: this.developer.review_count
             });
-            this.observer.observe(this.container);
+            this.observer.observe(this.options.element);
         } else (0, $393e6e330497b506$export$1d83028bd73dd3cc)(this.container, {
             rating: rating,
             developer: this.developer.slug,
-            dark: this.options.darkMode,
+            dark: !this.options.light,
             reviews: this.developer.review_count
         });
     }
     destroy() {
         if (!this.options.element || !this.options.element.childNodes.length) return;
         this.observer.disconnect();
-        this.container.removeEventListener("resize", this.viewportHandler);
         this.options.element.removeChild(this.container);
+        this.container = null;
     }
 }
 var $410a0149dfbe17cf$export$2e2bcd8739ae039 = $410a0149dfbe17cf$var$DeveloperWidget;

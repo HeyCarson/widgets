@@ -24,6 +24,8 @@ export const checkSize = (container, width) => {
 }
 
 export const changeWidget = (container, { dark, rating, reviews, developer } = {}) => {
+  container.classList.toggle('hc-developer-widget--dark', dark)
+
   container.replaceChild(
     buildLogo({ dark }),
     container.querySelector('.hc-developer-widget__logo-container')

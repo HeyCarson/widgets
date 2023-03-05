@@ -18,6 +18,7 @@ const $c14478ba79485d5e$export$c4a38de546513c4e = (container, width)=>{
     reviewContainer.classList.toggle("hc-developer-widget__review-container--left", width <= 270);
 };
 const $c14478ba79485d5e$export$1d83028bd73dd3cc = (container, { dark: dark , rating: rating , reviews: reviews , developer: developer  } = {})=>{
+    container.classList.toggle("hc-developer-widget--dark", dark);
     container.replaceChild($c14478ba79485d5e$var$buildLogo({
         dark: dark
     }), container.querySelector(".hc-developer-widget__logo-container"));

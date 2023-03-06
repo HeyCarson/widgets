@@ -8,14 +8,14 @@
 
 ### CDN
 
-Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@heycarson/themes-widget](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget)
+Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@heycarson/themes-widget](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget). Recommended to use lock into latest minor version.
 
 ```html
 <!-- HTML Snippet Example -->
 <div id='hc-dev-widget'></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.28/dist/developer.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.29/dist/developer.css">
 <script type='module'>
-  import DeveloperWidget from 'https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.28/dist/developer.js'
+  import DeveloperWidget from 'https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.29/dist/developer.js'
 
   window.addEventListener('DOMContentLoaded', function () {
     const widget = new DeveloperWidget({

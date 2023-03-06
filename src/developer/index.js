@@ -5,11 +5,14 @@ const initialOptions = {
   element: null,
   apiKey: null,
   developer: '',
-  light: true
+  light: true,
+
+  debug: false,
+  fetchDeveloper: null
 }
 
-const fetchDeveloper = async (endpoint, dev, wgp) => {
-  return await fetch(`${endpoint}/v1/themes/developers/${dev}${wgp ? '?wgp=1&slug=1' : ''}`)
+const fetchDeveloper = async (endpoint, apiKey) => {
+  return await fetch(`${endpoint}/v1/themes/developers-widget?hc_api_key=${apiKey}`)
     .then((res) => {
       if (res.ok) {
         return res.json()
@@ -30,6 +33,7 @@ class DeveloperWidget {
     this.options = { ...initialOptions, ...options }
 
     this.developer = null
+    this.apiKey = null
 
     this.container = null
     this.observerTimeout = null
@@ -56,8 +60,12 @@ class DeveloperWidget {
 
     this.options = { ...initialOptions, ...this.options, ...options, element: this.options.element }
 
-    if (this.developer?.slug !== this.options.developer) {
-      this.developer = await fetchDeveloper(this.options.endpoint, this.options.developer, !this.developer)
+    if (this.apiKey !== this.options.apiKey) {
+      if (this.options.fetchDeveloper instanceof Function) {
+        this.developer = await this.options.fetchDeveloper(this.options)
+      } else {
+        this.developer = await fetchDeveloper(this.options.endpoint, this.options.apiKey, !this.developer)
+      }
     }
 
     if (!this.developer) {

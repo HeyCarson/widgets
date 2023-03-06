@@ -21,7 +21,6 @@ Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@he
     const widget = new DeveloperWidget({
       element: document.querySelector('#hc-dev-widget'),
       apiKey: '...',
-      developer: '...'
     })
 
     widget.render({
@@ -64,7 +63,6 @@ function App () {
       widgetRef.current = new DevWidget({
         element: refEl.current,
         apiKey: '...',
-        developer: '...'
       })
     }
 

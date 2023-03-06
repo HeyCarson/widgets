@@ -109,10 +109,12 @@ const $410a0149dfbe17cf$var$initialOptions = {
     element: null,
     apiKey: null,
     developer: "",
-    light: true
+    light: true,
+    debug: false,
+    fetchDeveloper: null
 };
-const $410a0149dfbe17cf$var$fetchDeveloper = async (endpoint, dev, wgp)=>{
-    return await fetch(`${endpoint}/v1/themes/developers/${dev}${wgp ? "?wgp=1&slug=1" : ""}`).then((res)=>{
+const $410a0149dfbe17cf$var$fetchDeveloper = async (endpoint, apiKey)=>{
+    return await fetch(`${endpoint}/v1/themes/developers-widget?hc_api_key=${apiKey}`).then((res)=>{
         if (res.ok) return res.json();
         if (res.status === 404) return null;
         const body = res.json();
@@ -126,6 +128,7 @@ class $410a0149dfbe17cf$var$DeveloperWidget {
             ...options
         };
         this.developer = null;
+        this.apiKey = null;
         this.container = null;
         this.observerTimeout = null;
         this.observer = new ResizeObserver((entries)=>{
@@ -145,7 +148,10 @@ class $410a0149dfbe17cf$var$DeveloperWidget {
             ...options,
             element: this.options.element
         };
-        if (this.developer?.slug !== this.options.developer) this.developer = await $410a0149dfbe17cf$var$fetchDeveloper(this.options.endpoint, this.options.developer, !this.developer);
+        if (this.apiKey !== this.options.apiKey) {
+            if (this.options.fetchDeveloper instanceof Function) this.developer = await this.options.fetchDeveloper(this.options);
+            else this.developer = await $410a0149dfbe17cf$var$fetchDeveloper(this.options.endpoint, this.options.apiKey, !this.developer);
+        }
         if (!this.developer) throw new Error("Developer not found");
         let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0);
         rating = rating.toFixed(1) // Math.floor(rating) === rating ? 0 : 1

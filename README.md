@@ -15,17 +15,19 @@ Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@he
 <div id='hc-dev-widget'></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.25/dist/developer.css">
 <script type='module'>
-    import DeveloperWidget from 'https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.25/dist/developer.js'
+  import DeveloperWidget from 'https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.25/dist/developer.js'
 
   window.addEventListener('DOMContentLoaded', function () {
     const widget = new DeveloperWidget({
       element: document.querySelector('#hc-dev-widget'),
       apiKey: '...',
-      developer: '...',
-      light: true // optional (default: false)
+      developer: '...'
     })
 
-    widget.render()
+    widget.render({
+      light: false // optional (default: true)
+    })
+    
     // use widget.destroy() to unmount it
   })
 </script>
@@ -50,7 +52,9 @@ import '@heycarson/themes-widget/dist/developer.css'
 
 function App () {
   const refEl = useRef(null)
+  const widgetRef = useRef(null)
 
+  // initialize the widget and render it
   useEffect(() => {
     if (!refEl.current) {
       return
@@ -60,16 +64,19 @@ function App () {
       widgetRef.current = new DevWidget({
         element: refEl.current,
         apiKey: '...',
-        developer: '...',
-        light: true // optional (default: false)
+        developer: '...'
       })
     }
+
+    widgetRef.current.render({
+      light: false // optional (default: true)
+    })
 
     return () => {
       widgetRef.current?.destroy()
     }
   }, [])
-  
+
   return (
     // ...
     <div ref={refEl} />

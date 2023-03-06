@@ -6,16 +6,16 @@ const $c14478ba79485d5e$var$THEMES_PAGE = "https://heycarson.com/themes";
 const $c14478ba79485d5e$var$DEVELOPER_PAGE = "https://heycarson.com/themes/developer/";
 const $c14478ba79485d5e$export$c4a38de546513c4e = (container, width)=>{
     container.classList.toggle("hc-developer-widget--small", width <= 390);
-    container.classList.toggle("hc-developer-widget--left", width <= 270);
+    container.classList.toggle("hc-developer-widget--left", width <= 300);
     const logoContainer = container.querySelector(".hc-developer-widget__logo-container");
     logoContainer.classList.toggle("hc-developer-widget__logo-container--small", width <= 390);
-    logoContainer.classList.toggle("hc-developer-widget__logo-container--left", width <= 270);
+    logoContainer.classList.toggle("hc-developer-widget__logo-container--left", width <= 300);
     const starContainer = container.querySelector(".hc-developer-widget__star-container");
-    starContainer.classList.toggle("hc-developer-widget__star-container--small", width <= 270);
-    starContainer.classList.toggle("hc-developer-widget__star-container--left", width <= 270);
+    starContainer.classList.toggle("hc-developer-widget__star-container--small", width <= 300);
+    starContainer.classList.toggle("hc-developer-widget__star-container--left", width <= 300);
     const reviewContainer = container.querySelector(".hc-developer-widget__review-container");
-    reviewContainer.classList.toggle("hc-developer-widget__review-container--small", width <= 270);
-    reviewContainer.classList.toggle("hc-developer-widget__review-container--left", width <= 270);
+    reviewContainer.classList.toggle("hc-developer-widget__review-container--small", width <= 300);
+    reviewContainer.classList.toggle("hc-developer-widget__review-container--left", width <= 300);
 };
 const $c14478ba79485d5e$export$1d83028bd73dd3cc = (container, { dark: dark , rating: rating , reviews: reviews , developer: developer  } = {})=>{
     container.classList.toggle("hc-developer-widget--dark", dark);
@@ -127,7 +127,6 @@ class $3cb804a3430de775$var$DeveloperWidget {
         };
         this.developer = null;
         this.container = null;
-        this.viewportHandler = null;
         this.observerTimeout = null;
         this.observer = new ResizeObserver((entries)=>{
             clearTimeout(this.observerTimeout);
@@ -151,20 +150,20 @@ class $3cb804a3430de775$var$DeveloperWidget {
         let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0);
         rating = rating.toFixed(1) // Math.floor(rating) === rating ? 0 : 1
         ;
-        if (!this.container) {
-            this.container = (0, $c14478ba79485d5e$export$2e2bcd8739ae039)(this.options.element, {
-                rating: rating,
-                developer: this.developer.slug,
-                dark: !this.options.light,
-                reviews: this.developer.review_count
-            });
-            this.observer.observe(this.options.element);
-        } else (0, $c14478ba79485d5e$export$1d83028bd73dd3cc)(this.container, {
+        this.observer.disconnect();
+        if (!this.container) this.container = (0, $c14478ba79485d5e$export$2e2bcd8739ae039)(this.options.element, {
             rating: rating,
             developer: this.developer.slug,
             dark: !this.options.light,
             reviews: this.developer.review_count
         });
+        else (0, $c14478ba79485d5e$export$1d83028bd73dd3cc)(this.container, {
+            rating: rating,
+            developer: this.developer.slug,
+            dark: !this.options.light,
+            reviews: this.developer.review_count
+        });
+        this.observer.observe(this.options.element);
     }
     destroy() {
         if (!this.options.element || !this.options.element.childNodes.length) return;

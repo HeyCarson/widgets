@@ -8,19 +8,19 @@ const DEVELOPER_PAGE = 'https://heycarson.com/themes/developer/'
 
 export const checkSize = (container, width) => {
   container.classList.toggle('hc-developer-widget--small', width <= 390)
-  container.classList.toggle('hc-developer-widget--left', width <= 270)
+  container.classList.toggle('hc-developer-widget--left', width <= 300)
 
   const logoContainer = container.querySelector('.hc-developer-widget__logo-container')
   logoContainer.classList.toggle('hc-developer-widget__logo-container--small', width <= 390)
-  logoContainer.classList.toggle('hc-developer-widget__logo-container--left', width <= 270)
+  logoContainer.classList.toggle('hc-developer-widget__logo-container--left', width <= 300)
 
   const starContainer = container.querySelector('.hc-developer-widget__star-container')
-  starContainer.classList.toggle('hc-developer-widget__star-container--small', width <= 270)
-  starContainer.classList.toggle('hc-developer-widget__star-container--left', width <= 270)
+  starContainer.classList.toggle('hc-developer-widget__star-container--small', width <= 300)
+  starContainer.classList.toggle('hc-developer-widget__star-container--left', width <= 300)
 
   const reviewContainer = container.querySelector('.hc-developer-widget__review-container')
-  reviewContainer.classList.toggle('hc-developer-widget__review-container--small', width <= 270)
-  reviewContainer.classList.toggle('hc-developer-widget__review-container--left', width <= 270)
+  reviewContainer.classList.toggle('hc-developer-widget__review-container--small', width <= 300)
+  reviewContainer.classList.toggle('hc-developer-widget__review-container--left', width <= 300)
 }
 
 export const changeWidget = (container, { dark, rating, reviews, developer } = {}) => {

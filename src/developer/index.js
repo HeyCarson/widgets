@@ -32,7 +32,6 @@ class DeveloperWidget {
     this.developer = null
 
     this.container = null
-    this.viewportHandler = null
     this.observerTimeout = null
 
     this.observer = new ResizeObserver(entries => {
@@ -68,6 +67,8 @@ class DeveloperWidget {
     let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0)
     rating = rating.toFixed(1) // Math.floor(rating) === rating ? 0 : 1
 
+    this.observer.disconnect()
+
     if (!this.container) {
       this.container = builder(this.options.element, {
         rating,
@@ -75,8 +76,6 @@ class DeveloperWidget {
         dark: !this.options.light,
         reviews: this.developer.review_count
       })
-
-      this.observer.observe(this.options.element)
     } else {
       changeWidget(this.container, {
         rating,
@@ -85,6 +84,8 @@ class DeveloperWidget {
         reviews: this.developer.review_count
       })
     }
+
+    this.observer.observe(this.options.element)
   }
 
   destroy () {

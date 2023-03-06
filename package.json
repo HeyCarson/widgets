@@ -12,14 +12,17 @@
   "source": "src/index.js",
   "targets": {
     "main": {
-      "source": "src/index.js"
+      "source": "src/index.js",
+      "optimize": true
     },
     "css": {
       "source": "src/index.scss"
     },
     "developer": {
       "source": "src/developer/index.js",
+      "context": "browser",
       "outputFormat": "esmodule",
+      "optimize": true,
       "isLibrary": true
     },
     "devcss": {

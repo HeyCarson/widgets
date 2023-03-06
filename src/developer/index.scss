@@ -19,7 +19,7 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
   position: relative;
 
   grid-template-areas: "a b c";
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: auto auto auto;
 
   &--dark {
     background: black;
@@ -31,7 +31,7 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
     grid-template-areas:
             "a a"
             "b c";
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
   }
 
   &--left {
@@ -46,13 +46,12 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
   &__logo-container {
     display: block;
     height: 22px;
-    flex: 0 1 auto;
     width: auto;
+    min-width: 110px;
     grid-area: a;
 
     &--small {
       width: 100%;
-      flex: 1 1 auto;
       text-align: center;
     }
 

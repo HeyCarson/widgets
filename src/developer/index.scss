@@ -5,9 +5,9 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
 .hc-developer-widget {
   min-width: 160px;
   max-width: 396px;
-  max-height: 110px;
+  max-height: 130px;
   background: white;
-  display: inline-flex;
+  display: inline-grid;
   gap: 12px;
   justify-content: center;
   align-items: center;
@@ -18,6 +18,9 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
   padding: 16px;
   position: relative;
 
+  grid-template-areas: "a b c";
+  grid-template-columns: 1fr 1fr 1fr;
+
   &--dark {
     background: black;
     border: 1px solid transparent;
@@ -25,10 +28,19 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
 
   &--small {
     flex-wrap: wrap;
+    grid-template-areas:
+            "a a"
+            "b c";
+    grid-template-columns: 1fr 1fr;
   }
 
   &--left {
-    display: inline-block;
+    flex-wrap: wrap;
+    grid-template-areas:
+            "a"
+            "b"
+            "c";
+    grid-template-columns: 1fr;
   }
 
   &__logo-container {
@@ -36,17 +48,16 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
     height: 22px;
     flex: 0 1 auto;
     width: auto;
-    text-align: center;
-    order: 1;
+    grid-area: a;
 
     &--small {
       width: 100%;
       flex: 1 1 auto;
+      text-align: center;
     }
 
     &--left {
       text-align: left;
-      margin-bottom: 12px;
     }
   }
 
@@ -60,14 +71,12 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
     gap: 4px;
     justify-content: center;
     align-self: center;
-    flex: 0 1 auto;
     width: auto;
     font-family: $font-family !important;
-    order: 2;
+    grid-area: b;
 
     &--small {
-      width: 100%;
-      flex: 1 1 auto;
+
     }
 
     &--left {
@@ -105,26 +114,22 @@ $font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetic
   }
 
   &__review-container {
+    width: auto;
     height: 20px;
     display: flex;
+    grid-area: c;
     gap: 4px;
-    line-height: 20px;
-    flex: 0 1 auto;
-    width: auto;
     font-family: $font-family !important;
-    order: 3;
+    line-height: 20px;
     white-space: nowrap;
     text-align: center;
-    justify-content: center;
 
     &--small {
       width: 100%;
-      flex: 1 1 auto;
     }
 
     &--left {
       justify-content: flex-start;
-      margin-top: 12px;
     }
   }
 

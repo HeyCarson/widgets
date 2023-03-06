@@ -1,2 +1,80 @@
-## HeyCarson: Themes Widget
+# HeyCarson: Themes Widget
 
+[![](https://data.jsdelivr.com/v1/package/npm/@heycarson/themes-widget/badge)](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget)
+
+
+## Usage
+
+
+### CDN
+
+Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@heycarson/themes-widget](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget)
+
+```html
+<!-- HTML Snippet Example -->
+<div id='hc-dev-widget'></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.25/dist/developer.css">
+<script type='module'>
+    import DeveloperWidget from 'https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.25/dist/developer.js'
+
+  window.addEventListener('DOMContentLoaded', function () {
+    const widget = new DeveloperWidget({
+      element: document.querySelector('#hc-dev-widget'),
+      apiKey: '...',
+      developer: '...',
+      light: true // optional (default: false)
+    })
+
+    widget.render()
+    // use widget.destroy() to unmount it
+  })
+</script>
+```
+
+### NPM
+
+```bash
+npm install @heycarson/themes-widget
+```
+
+```jsx
+// ReactJS Example
+import React, { useEffect, useRef } from 'react'
+
+// import the complete set of widgets
+import { DeveloperWidget } from '@heycarson/themes-widget'
+import '@heycarson/themes-widget/dist/main.css'
+// or just the developer widget
+import DeveloperWidget from '@heycarson/themes-widget/dist/developer.js'
+import '@heycarson/themes-widget/dist/developer.css'
+
+function App () {
+  const refEl = useRef(null)
+
+  useEffect(() => {
+    if (!refEl.current) {
+      return
+    }
+
+    if (!widgetRef.current) {
+      widgetRef.current = new DevWidget({
+        element: refEl.current,
+        apiKey: '...',
+        developer: '...',
+        light: true // optional (default: false)
+      })
+    }
+
+    return () => {
+      widgetRef.current?.destroy()
+    }
+  }, [])
+  
+  return (
+    // ...
+    <div ref={refEl} />
+    // ...
+  )
+}
+
+```

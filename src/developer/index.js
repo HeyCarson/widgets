@@ -1,7 +1,7 @@
 import builder, { changeWidget, checkSize } from './builder.js'
 
 const initialOptions = {
-  endpoint: 'https://api.heycarson.com',
+  endpoint: 'https://referral-api.heycarson.com',
   element: null,
   apiKey: null,
   developer: '',
@@ -12,7 +12,7 @@ const initialOptions = {
 }
 
 const fetchDeveloper = async (endpoint, apiKey) => {
-  return await fetch(`${endpoint}/v1/themes/developers-widget?hc_api_key=${encodeURIComponent(apiKey)}`)
+  return await fetch(`${endpoint}/v1/theme-developer-widget?hc_api_key=${encodeURIComponent(apiKey)}`)
     .then((res) => {
       if (res.ok) {
         return res.json()

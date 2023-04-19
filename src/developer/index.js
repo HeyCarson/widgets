@@ -12,7 +12,13 @@ const initialOptions = {
 }
 
 const fetchDeveloper = async (endpoint, apiKey) => {
-  return await fetch(`${endpoint}/v1/theme-developer-widget?hc_api_key=${encodeURIComponent(apiKey)}`)
+  return await fetch(`${endpoint}/v1/theme-developer-widget`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'X-Api-Key': apiKey,
+    }
+  })
     .then((res) => {
       if (res.ok) {
         return res.json()

@@ -2,13 +2,31 @@
 
 [![](https://data.jsdelivr.com/v1/package/npm/@heycarson/themes-widget/badge)](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget)
 
+## Table of Contents
+- [Installation](#installation)
+- [API Key](#api-key)
+- [Usage](#usage)
+- [Developer Widget Options](#developerwidget-options)
 
-## Usage
-
+## Installation
 
 ### CDN
 
-Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@heycarson/themes-widget](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget). Recommended to use a specific version.
+Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@heycarson/themes-widget](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget). It is recommended to use a specific version.
+
+### NPM
+
+```bash
+npm install @heycarson/themes-widget
+```
+
+## API Key
+
+To generate a public API key, log in to your partner account [here](https://partners.heycarson.com/settings), and follow the steps to create a new API key.
+
+## Usage
+
+### CDN
 
 ```html
 <!-- HTML Snippet Example -->
@@ -20,7 +38,7 @@ Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@he
   window.addEventListener('DOMContentLoaded', function () {
     const widget = new DeveloperWidget({
       element: document.querySelector('#hc-dev-widget'),
-      apiKey: '...',
+      apiKey: 'YOUR_API_KEY',
     })
 
     widget.render({
@@ -34,10 +52,6 @@ Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@he
 
 ### NPM
 
-```bash
-npm install @heycarson/themes-widget
-```
-
 ```jsx
 // ReactJS Example
 import React, { useEffect, useRef } from 'react'
@@ -45,6 +59,7 @@ import React, { useEffect, useRef } from 'react'
 // import the complete set of widgets
 import { DeveloperWidget } from '@heycarson/themes-widget'
 import '@heycarson/themes-widget/dist/main.css'
+
 // or just the developer widget
 import DeveloperWidget from '@heycarson/themes-widget/dist/developer.js'
 import '@heycarson/themes-widget/dist/developer.css'
@@ -60,9 +75,9 @@ function App () {
     }
 
     if (!widgetRef.current) {
-      widgetRef.current = new DevWidget({
+      widgetRef.current = new DeveloperWidget({
         element: refEl.current,
-        apiKey: '...',
+        apiKey: 'YOUR_API_KEY',
       })
     }
 
@@ -81,5 +96,38 @@ function App () {
     // ...
   )
 }
-
 ```
+
+## DeveloperWidget Options
+
+### constructor()
+
+```javascript
+{
+  element: HTMLElement,
+  apiKey: string
+}
+```
+
+| Option  | Type          | Description                                                |
+|---------|---------------|------------------------------------------------------------|
+| element | HTMLElement   | The HTML element where the widget will be rendered.        |
+| apiKey  | string        | Your HeyCarson public API key.                             |
+
+### .render()
+
+.render can be called multiple times to update the widget.
+
+```javascript
+{
+  light: boolean
+}
+```
+
+| Option  | Type          | Description                                                |
+|---------|---------------|------------------------------------------------------------|
+| light   | boolean (optional) | Set the theme light (true) or dark (false). Default: true. |
+
+### .destroy()
+
+`none`

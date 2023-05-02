@@ -2,13 +2,14 @@ import builder, { changeWidget, checkSize } from './builder.js'
 
 const initialOptions = {
   endpoint: 'https://referral-api.heycarson.com',
-  element: null,
-  apiKey: null,
   developer: '',
   light: true,
-
   debug: false,
-  fetchDeveloper: null
+  fetchDeveloper: null,
+
+  // user options
+  element: null,
+  apiKey: ''
 }
 
 const fetchDeveloper = async (endpoint, apiKey) => {

@@ -79,24 +79,25 @@ class DeveloperWidget {
     }
 
     let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0)
-    rating = rating.toFixed(1) // Math.floor(rating) === rating ? 0 : 1
+    rating = rating.toFixed(Math.floor(rating) === rating ? 0 : 1)
+
+    if (rating > 4 && Math.round(rating) === 5) {
+      rating = 5
+    }
+
+    const buildOpts = {
+      rating,
+      developer: this.developer.slug,
+      dark: !this.options.light,
+      reviews: this.developer.review_count
+    }
 
     this.observer.disconnect()
 
     if (!this.container) {
-      this.container = builder(this.options.element, {
-        rating,
-        developer: this.developer.slug,
-        dark: !this.options.light,
-        reviews: this.developer.review_count
-      })
+      this.container = builder(this.options.element, buildOpts)
     } else {
-      changeWidget(this.container, {
-        rating,
-        developer: this.developer.slug,
-        dark: !this.options.light,
-        reviews: this.developer.review_count
-      })
+      changeWidget(this.container, buildOpts)
     }
 
     this.observer.observe(this.options.element)

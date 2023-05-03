@@ -80,13 +80,15 @@ class DeveloperWidget {
 
     let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0)
     rating = rating.toFixed(Math.floor(rating) === rating ? 0 : 1)
+    let stars = Math.floor(rating)
 
     if (rating > 4 && Math.round(rating) === 5) {
-      rating = 5
+      stars = 5
     }
 
     const buildOpts = {
       rating,
+      stars,
       developer: this.developer.slug,
       dark: !this.options.light,
       reviews: this.developer.review_count

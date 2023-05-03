@@ -26,7 +26,7 @@ export const checkSize = (container, width) => {
   reviewContainer.classList.toggle('hc-developer-widget__review-container--left', width <= maxLeftWidth)
 }
 
-export const changeWidget = (container, { dark, rating, reviews, developer } = {}) => {
+export const changeWidget = (container, { dark, stars, rating, reviews, developer } = {}) => {
   container.classList.toggle('hc-developer-widget--dark', dark)
 
   container.replaceChild(
@@ -35,7 +35,7 @@ export const changeWidget = (container, { dark, rating, reviews, developer } = {
   )
 
   container.replaceChild(
-    buildStar({ rating, dark }),
+    buildStar({ stars, dark }),
     container.querySelector('.hc-developer-widget__star-container')
   )
 
@@ -64,8 +64,8 @@ const buildLogo = ({ dark }) => {
   return logoContainer
 }
 
-const buildStar = ({ rating, dark }) => {
-  const starAmount = Math.floor(rating)
+const buildStar = ({ stars, dark }) => {
+  const starAmount = Math.floor(stars)
   const starContainer = document.createElement('div')
   const star = document.createElement('img')
   const starBack = document.createElement('div')
@@ -123,7 +123,7 @@ export default function builder (element, options = {}) {
 
   container.appendChild(buildLogo({ dark: options.dark }))
   container.appendChild(buildStar({
-    rating: options.rating,
+    stars: options.stars,
     dark: options.dark
   }))
   container.appendChild(buildReviews({

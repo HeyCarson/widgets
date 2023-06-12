@@ -1,7 +1,7 @@
 {
   "name": "@heycarson/themes-widget",
   "type": "module",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "Themes widget",
   "author": "David Lavieri <david@heycarson.com>",
   "license": "MIT",

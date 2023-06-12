@@ -1,4 +1,4 @@
-# HeyCarson: Themes Widget
+# HeyCarson Partner Widgets
 
 [![](https://data.jsdelivr.com/v1/package/npm/@heycarson/themes-widget/badge)](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget)
 
@@ -38,7 +38,8 @@ To generate a public API key, log in to your partner account [here](https://part
   window.addEventListener('DOMContentLoaded', function () {
     const widget = new DeveloperWidget({
       element: document.querySelector('#hc-dev-widget'),
-      apiKey: 'YOUR_API_KEY',
+      apiKey: 'YOUR_API_KEY', 
+      ratingFrom: '[themes|apps]' // mutually exclusive
     })
 
     widget.render({
@@ -81,6 +82,7 @@ function App () {
       widgetRef.current = new DeveloperWidget({
         element: refEl.current,
         apiKey: 'YOUR_API_KEY',
+        ratingFrom: '[themes|apps]' // mutually exclusive
       })
     }
 
@@ -108,14 +110,16 @@ function App () {
 ```javascript
 {
   element: HTMLElement,
-  apiKey: string
+  apiKey: string,
+  slug: string
 }
 ```
 
-| Option  | Type          | Description                                                |
-|---------|---------------|------------------------------------------------------------|
-| element | HTMLElement   | The HTML element where the widget will be rendered.        |
-| apiKey  | string        | Your HeyCarson public API key.                             |
+| Option  | Type         | Description                                         |
+|---------|--------------|-----------------------------------------------------|
+| element | HTMLElement  | The HTML element where the widget will be rendered. |
+| apiKey  | string       | Your HeyCarson public API key.<br/>                 |
+| ratingFrom    | string | Pull data from themes or app directory              |
 
 ### .render()
 

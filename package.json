@@ -9,6 +9,8 @@
   "devcss": "dist/developer.css",
   "theme": "dist/theme.js",
   "themecss": "dist/theme.css",
+  "base": "dist/base.js",
+  "basecss": "dist/base.css",
   "main": "dist/main.js",
   "css": "dist/main.css",
   "source": "src/index.js",
@@ -19,6 +21,16 @@
     },
     "css": {
       "source": "src/index.scss"
+    },
+    "base": {
+      "source": "src/base/index.js",
+      "context": "browser",
+      "outputFormat": "esmodule",
+      "optimize": true,
+      "isLibrary": true
+    },
+    "basecss": {
+      "source": "src/base/index.scss"
     },
     "developer": {
       "source": "src/developer/index.js",

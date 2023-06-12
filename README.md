@@ -39,7 +39,7 @@ To generate a public API key, log in to your partner account [here](https://part
     const widget = new DeveloperWidget({
       element: document.querySelector('#hc-dev-widget'),
       apiKey: 'YOUR_API_KEY', 
-      slug: 'YOUR_SLUG_ID'
+      ratingFrom: '[themes|apps]' // mutually exclusive
     })
 
     widget.render({
@@ -82,7 +82,7 @@ function App () {
       widgetRef.current = new DeveloperWidget({
         element: refEl.current,
         apiKey: 'YOUR_API_KEY',
-        slug: 'YOUR_SLUG_ID'
+        ratingFrom: '[themes|apps]' // mutually exclusive
       })
     }
 
@@ -115,11 +115,11 @@ function App () {
 }
 ```
 
-| Option  | Type         | Description                                                                                            |
-|---------|--------------|--------------------------------------------------------------------------------------------------------|
-| element | HTMLElement  | The HTML element where the widget will be rendered.                                                    |
-| apiKey  | string       | Your HeyCarson public API key.<br/>                                                                    |
-| slug    | string | The slug of the profile to load. |
+| Option  | Type         | Description                                         |
+|---------|--------------|-----------------------------------------------------|
+| element | HTMLElement  | The HTML element where the widget will be rendered. |
+| apiKey  | string       | Your HeyCarson public API key.<br/>                 |
+| ratingFrom    | string | Pull data from themes or app directory              |
 
 ### .render()
 

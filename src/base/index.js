@@ -5,6 +5,9 @@ const initialOptions = {
   element: null,
   apiKey: null,
 
+  type: '', // developer, theme or app
+  ratingFrom: '', // developer only
+
   slug: '',
   light: true,
 
@@ -51,6 +54,7 @@ class BaseWidget {
         slug: this.options.slug,
         endpoint: this.options.endpoint,
         apiKey: this.options.apiKey,
+        from: this.options.ratingFrom,
       })
     }
 

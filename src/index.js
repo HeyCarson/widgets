@@ -1,1 +1,1 @@
-export { default as DeveloperWidget } from './developer/index.js'
+export { default as DeveloperWidget } from './base/index.js'

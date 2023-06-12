@@ -1,18 +1,13 @@
-import builder, { changeWidget, checkSize } from './builder.js'
+import BaseWidget from '../base/index.js'
 
-const initialOptions = {
-  endpoint: 'https://referral-api.heycarson.com',
-  element: null,
-  apiKey: null,
-  developer: '',
-  light: true,
+export const DEVELOPER_PAGE = 'https://heycarson.com/themes/developer/'
 
-  debug: false,
-  fetchDeveloper: null
-}
+export const fetchDeveloper = async ({ endpoint, slug, apiKey }) => {
+  const params = new URLSearchParams()
+  params.set('type', 'developer')
+  params.set('slug', slug)
 
-const fetchDeveloper = async (endpoint, apiKey) => {
-  return await fetch(`${endpoint}/v1/theme-developer-widget`, {
+  return await fetch(`${endpoint}/v1/widget?${params.toString()}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -34,85 +29,21 @@ const fetchDeveloper = async (endpoint, apiKey) => {
     })
 }
 
-class DeveloperWidget {
-  constructor (options = {}) {
-    this.options = { ...initialOptions, ...options }
+export const developerURL = slug => {
+  return `${DEVELOPER_PAGE}${slug}`
+}
 
-    this.developer = null
-    this.apiKey = null
+class DeveloperWidget extends BaseWidget {
+  constructor (options) {
+    options = {
+      ...options,
 
-    this.container = null
-    this.observerTimeout = null
-
-    this.observer = new ResizeObserver(entries => {
-      clearTimeout(this.observerTimeout)
-
-      if (!entries.length) {
-        return
-      }
-
-      const { width } = entries[0].contentRect
-
-      this.observerTimeout = setTimeout(() => {
-        checkSize(this.container, width)
-      }, 100)
-    })
-  }
-
-  async render (options = {}) {
-    if (!(this.options.element instanceof Element)) {
-      throw new Error('options.element: HTMLElement is required')
+      type: 'developer',
+      fetcher: fetchDeveloper,
+      urlBuilder: developerURL,
     }
 
-    this.options = { ...initialOptions, ...this.options, ...options, element: this.options.element }
-
-    if (this.apiKey !== this.options.apiKey) {
-      if (this.options.fetchDeveloper instanceof Function) {
-        this.developer = await this.options.fetchDeveloper(this.options)
-      } else {
-        this.developer = await fetchDeveloper(this.options.endpoint, this.options.apiKey, !this.developer)
-      }
-    }
-
-    if (!this.developer) {
-      throw new Error('Developer not found')
-    }
-
-    let rating = Number(this.developer.review_rating || this.developer.overall_rating || 0)
-    rating = rating.toFixed(Math.floor(rating) === rating ? 0 : 1)
-    let stars = Math.floor(rating)
-
-    if (rating > 4 && Math.round(rating) === 5) {
-      stars = 5
-    }
-
-    const buildOpts = {
-      rating,
-      stars,
-      developer: this.developer.slug,
-      dark: !this.options.light,
-      reviews: this.developer.review_count
-    }
-
-    this.observer.disconnect()
-
-    if (!this.container) {
-      this.container = builder(this.options.element, buildOpts)
-    } else {
-      changeWidget(this.container, buildOpts)
-    }
-
-    this.observer.observe(this.options.element)
-  }
-
-  destroy () {
-    if (!this.options.element || !this.options.element.childNodes.length) {
-      return
-    }
-
-    this.observer.disconnect()
-    this.options.element.removeChild(this.container)
-    this.container = null
+    super(options)
   }
 }
 

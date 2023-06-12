@@ -1,10 +1,10 @@
 import BaseWidget from '../base/index.js'
 
-const ENTITY = 'https://heycarson.com/themes/developer/'
+const ENTITY_URL = 'https://heycarson.com/themes/reviews/'
 
-const getDeveloper = async ({ endpoint, slug, apiKey }) => {
+const getTheme = async ({ endpoint, slug, apiKey }) => {
   const params = new URLSearchParams()
-  params.set('type', 'developer')
+  params.set('type', 'theme')
   params.set('slug', slug)
 
   return await fetch(`${endpoint}/v1/widget?${params.toString()}`, {
@@ -25,21 +25,21 @@ const getDeveloper = async ({ endpoint, slug, apiKey }) => {
 
       const body = res.json()
 
-      throw new Error('Something went wrong' + (body?.message ? `: ${body.message}` : ''))
+      throw new Error('Something went wrong' + (body?.message || ''))
     })
 }
 
-export const getURL = slug => {
-  return `${ENTITY}${slug}`
+const getURL = slug => {
+  return `${ENTITY_URL}${slug}`
 }
 
-class DeveloperWidget extends BaseWidget {
+class ThemeWidget extends BaseWidget {
   constructor (options) {
     options = {
       ...options,
 
-      type: 'developer',
-      fetcher: getDeveloper,
+      type: 'theme',
+      fetcher: getTheme,
       urlBuilder: getURL,
     }
 
@@ -47,4 +47,4 @@ class DeveloperWidget extends BaseWidget {
   }
 }
 
-export default DeveloperWidget
+export default ThemeWidget

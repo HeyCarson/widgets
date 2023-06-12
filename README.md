@@ -81,6 +81,7 @@ function App () {
       widgetRef.current = new DeveloperWidget({
         element: refEl.current,
         apiKey: 'YOUR_API_KEY',
+        slug: 'YOUR_SLUG_ID'
       })
     }
 

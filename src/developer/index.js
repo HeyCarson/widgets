@@ -30,8 +30,12 @@ const getDeveloper = async ({ endpoint, slug, apiKey, from }) => {
     })
 }
 
-export const getURL = slug => {
-  return `${ENTITY}${slug}`
+export const urlBuilder = entity => {
+  return `${ENTITY}${entity.slug}`
+}
+
+export const labelBuilder = entity => {
+  return entity.name
 }
 
 class DeveloperWidget extends BaseWidget {
@@ -41,7 +45,8 @@ class DeveloperWidget extends BaseWidget {
 
       type: 'developer',
       fetcher: getDeveloper,
-      urlBuilder: getURL,
+      urlBuilder,
+      labelBuilder,
     }
 
     super(options)

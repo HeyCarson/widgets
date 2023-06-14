@@ -29,8 +29,12 @@ const getTheme = async ({ endpoint, slug, apiKey }) => {
     })
 }
 
-const getURL = slug => {
-  return `${ENTITY_URL}${slug}`
+const urlBuilder = entity => {
+  return `${ENTITY_URL}${entity.slug}`
+}
+
+export const labelBuilder = entity => {
+  return `${entity.name} Shopify Theme`
 }
 
 class ThemeWidget extends BaseWidget {
@@ -40,7 +44,8 @@ class ThemeWidget extends BaseWidget {
 
       type: 'theme',
       fetcher: getTheme,
-      urlBuilder: getURL,
+      urlBuilder,
+      labelBuilder,
     }
 
     super(options)

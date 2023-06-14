@@ -25,7 +25,7 @@ export const checkSize = (container, width) => {
   reviewContainer.classList.toggle('hc-base-widget__review-container--left', width <= maxLeftWidth)
 }
 
-export const changeWidget = (container, { dark, stars, rating, reviews, url } = {}) => {
+export const changeWidget = (container, { dark, stars, rating, reviews, url, label } = {}) => {
   container.classList.toggle('hc-base-widget--dark', dark)
 
   container.replaceChild(
@@ -44,6 +44,21 @@ export const changeWidget = (container, { dark, stars, rating, reviews, url } = 
     }),
     container.querySelector('.hc-base-widget__review-container')
   )
+
+  container.replaceChild(
+    buildLabel({ text: label, dark }),
+    container.querySelector('.hc-base-widget__label')
+  )
+}
+
+const buildLabel = ({ text, dark }) => {
+  const label = document.createElement('div')
+  label.classList.add('hc-base-widget__label')
+  label.textContent = text
+
+  label.classList.toggle('hc-base-widget__label--dark', !dark)
+
+  return label
 }
 
 const buildLogo = ({ dark }) => {
@@ -128,6 +143,10 @@ export default function builder (element, options = {}) {
     rating: options.rating,
     url: options.url,
     reviews: options.reviews,
+    dark: options.dark
+  }))
+  container.appendChild(buildLabel({
+    text: options.label,
     dark: options.dark
   }))
 

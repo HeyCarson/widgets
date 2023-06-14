@@ -17,7 +17,7 @@ $dark-color: #252946;
   border-radius: 6px;
   font-family: $font-family;
   border: 1px solid transparent;
-  padding: 22px 16px;
+  padding: 22px 16px 24px 16px;
   position: relative;
 
   grid-template-areas: "a b c";
@@ -43,6 +43,24 @@ $dark-color: #252946;
             "b"
             "c";
     grid-template-columns: 1fr;
+  }
+
+  &__label {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    max-width: 545px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    height: 12px;
+
+    // center on x axis
+    bottom: 6px;
+
+    &--dark {
+      color: $dark-color;
+    }
   }
 
   &__logo-container {

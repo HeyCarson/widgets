@@ -15,6 +15,7 @@ const initialOptions = {
 
   fetcher: null,
   urlBuilder: null,
+  labelBuilder: null,
 }
 
 class BaseWidget {
@@ -76,7 +77,8 @@ class BaseWidget {
       slug: this.entity.slug,
       dark: !this.options.light,
       reviews: this.entity.review_count,
-      url: this.options.urlBuilder && this.options.urlBuilder(this.entity.slug),
+      url: this.options.urlBuilder && this.options.urlBuilder(this.entity),
+      label: this.options.labelBuilder && this.options.labelBuilder(this.entity),
     }
 
     this.observer.disconnect()

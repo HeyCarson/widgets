@@ -38,6 +38,11 @@ class BaseWidget {
       const { width } = entries[0].contentRect
 
       this.observerTimeout = setTimeout(() => {
+        if (!this.container) {
+          this.observer?.disconnect && this.observer.disconnect()
+          return null
+        }
+
         checkSize(this.container, width)
       }, 100)
     })

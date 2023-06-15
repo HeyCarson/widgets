@@ -93,6 +93,8 @@ class BaseWidget {
   }
 
   destroy () {
+    clearTimeout(this.observerTimeout)
+
     if (!this.options.element || !this.options.element.childNodes.length) {
       return
     }

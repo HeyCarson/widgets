@@ -34,10 +34,6 @@ export const urlBuilder = entity => {
   return `${ENTITY}${entity.slug}`
 }
 
-export const labelBuilder = entity => {
-  return entity.name
-}
-
 class DeveloperWidget extends BaseWidget {
   constructor (options) {
     options = {
@@ -45,8 +41,7 @@ class DeveloperWidget extends BaseWidget {
 
       type: 'developer',
       fetcher: getDeveloper,
-      urlBuilder,
-      labelBuilder,
+      urlBuilder
     }
 
     super(options)

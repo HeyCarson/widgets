@@ -33,10 +33,6 @@ const urlBuilder = entity => {
   return `${ENTITY_URL}${entity.slug}`
 }
 
-export const labelBuilder = entity => {
-  return `${entity.name} Shopify Theme`
-}
-
 class ThemeWidget extends BaseWidget {
   constructor (options) {
     options = {
@@ -44,8 +40,7 @@ class ThemeWidget extends BaseWidget {
 
       type: 'theme',
       fetcher: getTheme,
-      urlBuilder,
-      labelBuilder,
+      urlBuilder
     }
 
     super(options)

@@ -5,3 +5,5 @@
 yarn-error.log
 !/dist
 /publish.sh
+npm-debug.log
+pnpm-debug.log

@@ -31,7 +31,7 @@ const getDeveloper = async ({ endpoint, slug, apiKey, from }) => {
 }
 
 export const urlBuilder = entity => {
-  return `${ENTITY}${entity.slug}`
+  return `${ENTITY}${entity.slug}?wgl=1`
 }
 
 class DeveloperWidget extends BaseWidget {

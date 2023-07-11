@@ -3,8 +3,6 @@ const logoImgDark = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-log
 const starLight = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-star-light.svg'
 const starDark = 'https://carson-themes.s3.amazonaws.com/assets/heycarson-star-dark.svg'
 
-const THEMES_PAGE = 'https://heycarson.com/themes'
-
 const maxSmallWidth = 500
 const maxLeftWidth = 350
 
@@ -29,7 +27,7 @@ export const changeWidget = (container, { dark, stars, rating, reviews, url } = 
   container.classList.toggle('hc-base-widget--dark', dark)
 
   container.replaceChild(
-    buildLogo({ dark }),
+    buildLogo({ dark, url }),
     container.querySelector('.hc-base-widget__logo-container')
   )
 
@@ -46,11 +44,11 @@ export const changeWidget = (container, { dark, stars, rating, reviews, url } = 
   )
 }
 
-const buildLogo = ({ dark }) => {
+const buildLogo = ({ dark, url }) => {
   const logoContainer = document.createElement('a')
   const logo = document.createElement('img')
 
-  logoContainer.setAttribute('href', THEMES_PAGE + '?wgl=1')
+  logoContainer.setAttribute('href', url)
   logoContainer.setAttribute('target', '_blank')
   logoContainer.setAttribute('rel', 'noopener')
   logoContainer.classList.add('hc-base-widget__logo-container')
@@ -119,7 +117,7 @@ export default function builder (element, options = {}) {
   container.classList.add('hc-base-widget')
   container.classList.toggle('hc-base-widget--dark', options.dark)
 
-  container.appendChild(buildLogo({ dark: options.dark }))
+  container.appendChild(buildLogo({ dark: options.dark, url: options.url }))
   container.appendChild(buildStar({
     stars: options.stars,
     dark: options.dark

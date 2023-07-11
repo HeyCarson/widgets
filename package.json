@@ -56,7 +56,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "watch": "parcel watch",
-    "build": "npm run clean && parcel build"
+    "build": "npm run clean && parcel build --no-source-maps"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.8.3",

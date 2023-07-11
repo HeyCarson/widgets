@@ -30,7 +30,7 @@ const getTheme = async ({ endpoint, slug, apiKey }) => {
 }
 
 const urlBuilder = entity => {
-  return `${ENTITY_URL}${entity.slug}`
+  return `${ENTITY_URL}${entity.slug}?wgl=1`
 }
 
 class ThemeWidget extends BaseWidget {

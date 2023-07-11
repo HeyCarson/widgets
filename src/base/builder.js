@@ -26,8 +26,12 @@ export const checkSize = (container, width) => {
 export const changeWidget = (container, { dark, stars, rating, reviews, url } = {}) => {
   container.classList.toggle('hc-base-widget--dark', dark)
 
+  container.setAttribute('href', url)
+  container.setAttribute('target', '_blank')
+  container.setAttribute('rel', 'noopener')
+
   container.replaceChild(
-    buildLogo({ dark, url }),
+    buildLogo({ dark }),
     container.querySelector('.hc-base-widget__logo-container')
   )
 
@@ -38,19 +42,16 @@ export const changeWidget = (container, { dark, stars, rating, reviews, url } = 
 
   container.replaceChild(
     buildReviews({
-      rating, reviews, dark, url
+      rating, reviews, dark
     }),
     container.querySelector('.hc-base-widget__review-container')
   )
 }
 
-const buildLogo = ({ dark, url }) => {
-  const logoContainer = document.createElement('a')
+const buildLogo = ({ dark }) => {
+  const logoContainer = document.createElement('div')
   const logo = document.createElement('img')
 
-  logoContainer.setAttribute('href', url)
-  logoContainer.setAttribute('target', '_blank')
-  logoContainer.setAttribute('rel', 'noopener')
   logoContainer.classList.add('hc-base-widget__logo-container')
   logo.classList.add('hc-base-widget__logo')
   logo.setAttribute('src', !dark ? logoImgDark : logoImgLight)
@@ -76,16 +77,16 @@ const buildStar = ({ stars, dark }) => {
   starBack.appendChild(star)
 
   ;(new Array(starAmount).fill(0))
-    .forEach(star => starContainer.appendChild(starBack.cloneNode(true)))
+    .forEach(() => starContainer.appendChild(starBack.cloneNode(true)))
 
   return starContainer
 }
 
-const buildReviews = ({ url, rating, reviews, dark }) => {
+const buildReviews = ({ rating, reviews, dark }) => {
   const reviewContainer = document.createElement('div')
   const rate = document.createElement('span')
   const separator = document.createElement('span')
-  const review = document.createElement('a')
+  const review = document.createElement('span')
 
   reviewContainer.classList.add('hc-base-widget__review-container')
 
@@ -100,9 +101,6 @@ const buildReviews = ({ url, rating, reviews, dark }) => {
   separator.innerText = '|'
 
   review.innerText = reviews === 1 ? '1 review' : `${reviews} reviews`
-  review.setAttribute('href', url)
-  review.setAttribute('target', '_blank')
-  review.setAttribute('rel', 'noopener')
 
   reviewContainer.appendChild(rate)
   reviewContainer.appendChild(separator)
@@ -112,10 +110,14 @@ const buildReviews = ({ url, rating, reviews, dark }) => {
 }
 
 export default function builder (element, options = {}) {
-  const container = document.createElement('div')
+  const container = document.createElement('a')
 
   container.classList.add('hc-base-widget')
   container.classList.toggle('hc-base-widget--dark', options.dark)
+
+  container.setAttribute('href', options.url)
+  container.setAttribute('target', '_blank')
+  container.setAttribute('rel', 'noopener')
 
   container.appendChild(buildLogo({ dark: options.dark, url: options.url }))
   container.appendChild(buildStar({

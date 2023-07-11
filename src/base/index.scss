@@ -10,7 +10,7 @@ $dark-color: #252946;
   max-height: 160px;
   background: white;
   display: inline-grid;
-  gap: 12px;
+  gap: 16px;
   justify-content: center;
   align-items: center;
   color: white;
@@ -19,6 +19,7 @@ $dark-color: #252946;
   border: 1px solid transparent;
   padding: 22px 16px;
   position: relative;
+  text-decoration: none !important;
 
   grid-template-areas: "a b c";
   grid-template-columns: auto auto auto;
@@ -97,8 +98,8 @@ $dark-color: #252946;
   }
 
   &__star {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
   &__review-container {

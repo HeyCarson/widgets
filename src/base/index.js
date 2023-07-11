@@ -68,7 +68,7 @@ class BaseWidget {
     }
 
     let rating = Number(this.entity.review_rating || 0)
-    rating = rating.toFixed(Math.floor(rating) === rating ? 0 : 1)
+    rating = rating.toFixed(1)
     let stars = Math.floor(rating)
 
     if (rating > 4 && Math.round(rating) === 5) {

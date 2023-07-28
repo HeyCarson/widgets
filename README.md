@@ -1,6 +1,6 @@
 # HeyCarson Partner Widgets
 
-[![](https://data.jsdelivr.com/v1/package/npm/@heycarson/themes-widget/badge)](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget)
+[![](https://data.jsdelivr.com/v1/package/npm/@heycarson/widgets/badge)](https://www.jsdelivr.com/package/npm/@heycarson/widgets)
 
 ## Table of Contents
 - [Installation](#installation)
@@ -12,12 +12,12 @@
 
 ### CDN
 
-Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@heycarson/themes-widget](https://www.jsdelivr.com/package/npm/@heycarson/themes-widget). It is recommended to use a specific version.
+Check JSDelivr for the latest version: [https://www.jsdelivr.com/package/npm/@heycarson/widgets](https://www.jsdelivr.com/package/npm/@heycarson/widgets). It is recommended to use a specific version.
 
 ### NPM
 
 ```bash
-npm install @heycarson/themes-widget
+npm install @heycarson/widgets
 ```
 
 ## API Key
@@ -31,9 +31,9 @@ To generate a public API key, log in to your partner account [here](https://part
 ```html
 <!-- HTML Snippet Example -->
 <div id='hc-dev-widget'></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.x/dist/developer.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@heycarson/widgets@0.0.x/dist/developer.css">
 <script type='module'>
-  import DeveloperWidget from 'https://cdn.jsdelivr.net/npm/@heycarson/themes-widget@0.0.x/dist/developer.js'
+  import DeveloperWidget from 'https://cdn.jsdelivr.net/npm/@heycarson/widgets@0.0.x/dist/developer.js'
 
   window.addEventListener('DOMContentLoaded', function () {
     const widget = new DeveloperWidget({
@@ -57,12 +57,12 @@ To generate a public API key, log in to your partner account [here](https://part
 import React, { useEffect, useRef } from 'react'
 
 // import the complete set of widgets
-import { DeveloperWidget } from '@heycarson/themes-widget'
-import '@heycarson/themes-widget/dist/main.css'
+import { DeveloperWidget } from '@heycarson/widgets'
+import '@heycarson/widgets/dist/main.css'
 
 // or just the developer widget
-import DeveloperWidget from '@heycarson/themes-widget/dist/developer.js'
-import '@heycarson/themes-widget/dist/developer.css'
+import DeveloperWidget from '@heycarson/widgets/dist/developer.js'
+import '@heycarson/widgets/dist/developer.css'
 ```
 
 ### ReactJS Example

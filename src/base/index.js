@@ -81,7 +81,7 @@ class BaseWidget {
       slug: this.entity.slug,
       dark: !this.options.light,
       reviews: this.entity.review_count,
-      url: this.options.urlBuilder && this.options.urlBuilder(this.entity)
+      url: this.options.urlBuilder && this.options.urlBuilder(this.entity, this.options)
     }
 
     this.observer.disconnect()

@@ -1,6 +1,7 @@
 import BaseWidget from '../base/index.js'
 
-const ENTITY = 'https://heycarson.com/themes/developer/'
+const THEME_ENTITY = 'https://heycarson.com/themes/developer/'
+const APP_ENTITY = 'https://heycarson.com/apps/developer/'
 
 const getDeveloper = async ({ endpoint, slug, apiKey, from }) => {
   const params = new URLSearchParams()
@@ -30,8 +31,14 @@ const getDeveloper = async ({ endpoint, slug, apiKey, from }) => {
     })
 }
 
-export const urlBuilder = entity => {
-  return `${ENTITY}${entity.slug}?wgl=1`
+export const urlBuilder = (entity, {ratingFrom: from} = {}) => {
+  if (from === 'themes') {
+    return `${THEME_ENTITY}${entity.slug}?wgl=1`
+  } else if (from === 'apps') {
+    return `${APP_ENTITY}${entity.slug}?wgl=1`
+  }
+
+  return ''
 }
 
 class DeveloperWidget extends BaseWidget {

@@ -1,14 +1,16 @@
 {
-  "name": "@heycarson/themes-widget",
+  "name": "@heycarson/widgets",
   "type": "module",
   "version": "0.0.44",
-  "description": "Themes widget",
+  "description": "Theme/App Widgets",
   "author": "David Lavieri <david@heycarson.com>",
   "license": "MIT",
   "developer": "dist/developer.js",
   "devcss": "dist/developer.css",
   "theme": "dist/theme.js",
   "themecss": "dist/theme.css",
+  "app": "dist/app.js",
+  "appcss": "dist/app.css",
   "base": "dist/base.js",
   "basecss": "dist/base.css",
   "main": "dist/main.js",
@@ -51,6 +53,16 @@
     },
     "themecss": {
       "source": "src/theme/index.scss"
+    },
+    "app": {
+      "source": "src/app/index.js",
+      "context": "browser",
+      "outputFormat": "esmodule",
+      "optimize": true,
+      "isLibrary": true
+    },
+    "appcss": {
+      "source": "src/app/index.scss"
     }
   },
   "scripts": {
@@ -59,16 +71,15 @@
     "build": "npm run clean && parcel build --no-source-maps"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "2.8.3",
-    "parcel": "^2.8.3",
-    "sharp": "^0.31.1"
+    "@parcel/transformer-sass": "2.9.3",
+    "parcel": "^2.9.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/heycarson/themes-widget.git"
+    "url": "git+ssh://git@github.com:HeyCarson/widgets.git"
   },
   "bugs": {
-    "url": "https://bitbucket.org/heycarson/themes-widget/jira"
+    "url": "https://github.com/HeyCarson/widgets/issues"
   },
-  "homepage": "https://bitbucket.org/heycarson/themes-widget"
+  "homepage": "https://github.com/HeyCarson/widgets"
 }
